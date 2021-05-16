@@ -33,13 +33,23 @@ doSomething()
   .then((goodNews) => console.log(goodNews))
   .catch((badNews) => console.log(badNews));
 
-Promise.all([readJSONFile(), doSomething()])
+function timeout() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("timeout");
+    }, 1500);
+  });
+}
+
+timeout().then((outcome) => console.log(outcome));
+
+Promise.all([readJSONFile(), doSomething(), timeout()])
   .then((responses) => {
     console.log(responses);
 
     console.log(c);
   })
-  .catch(() => "Error running promises for the second time");
+  .catch(() => "Error running promises");
 
 console.log(c);
 
@@ -49,6 +59,7 @@ console.log(c);
 12
 Good news: Promise resolved
 File not found
-[ 'File not found', 'Good news: Promise resolved' ]
+timeout
+[ 'File not found', 'Good news: Promise resolved', 'timeout' ]
 12
 */
