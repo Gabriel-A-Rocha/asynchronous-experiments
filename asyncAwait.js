@@ -9,8 +9,8 @@ const doSomethingAsync = () => {
 console.log(1);
 
 const response = await doSomethingAsync();
-
 console.log(response);
+
 console.log(2);
 
 console.log(3);
